@@ -11,18 +11,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class KadaiFirstController {
 
 	@GetMapping("/dayofweek/{yyyymmdd}")
-	public Calendar dispDayOfWeek(@PathVariable String yyyymmdd) {
+	public String dispDayOfWeek(@PathVariable String yyyymmdd) {
 		String YYYY = yyyymmdd.substring(0,4);
 		int yyyy = Integer.parseInt(YYYY);
 		String MM = yyyymmdd.substring(4,6);
 		int mm = Integer.parseInt(MM)-1;
 		String DD = yyyymmdd.substring(6,8);
-		int dd = Integer.parseInt(DD);
+		int dd = Integer.parseInt(DD)+1;
 		
 		Calendar calDate = Calendar.getInstance();
 		calDate.set(yyyy, mm, dd);
+		int dayOfWeek = calDate.get(Calendar.DAY_OF_WEEK);
 		
-		return calDate;
+		String[] weekDays = {"", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+		return weekDays[dayOfWeek];
 		
 	}
 	
